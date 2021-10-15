@@ -5,19 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
     <script>
         $(document).ready(function(){
             var html_str = "";
             for(var i = 1; i <=150; i++) {
-                    html_str += "<img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'> </img>"
+                    html_str += "<img id=#"+i+" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'></img>"
             }
-            $("#pokemones").html(html_str);  
+            $("#pokemones").html(html_str); 
+            
+        });
+        $(document).ready(function(){
+            $.get("https://pokeapi.co/api/v2/pokemon/", function(datos) {
+                console.log(datos);
+                $('#1').click(function(){
+                    var html_str = "";
+                    html_str += "<h4>Types</h4>";
+                    html_str += "<ul>";
+                    html_str += "<li>" + datos.results[0].name + "</li>";
+                    html_str += "</ul>";
+                    $("#info").html(html_str);
+                });   
+            }, "json");
+
         });
     </script>
 </head>
 <body>
-    <div id="pokemones">
+    <div id="container">
+        <div id="pokemones">
+
+        </div>
+        <div id="info">
+    
+        </div>
     </div>
 </body>
 </html>
